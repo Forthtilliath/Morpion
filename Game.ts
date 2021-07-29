@@ -20,6 +20,10 @@ this.playerTurn = Math.floor(Math.random() * 2);
   launch() {
     this.init();
   }
+  
+  setPlayerTurn() {
+    this.playerTurn = +!this.playerTurn;
+  }
 };
 
 export default Game;

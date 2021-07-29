@@ -8,3 +8,6 @@ const Morpion: Game = new Game(nbCol, nbLig)
 
 Morpion.launch();
 Logger.log(Morpion);
+
+Morpion.setPlayerTurn();
+Logger.log(Morpion);
