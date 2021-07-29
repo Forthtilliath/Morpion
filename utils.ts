@@ -1,0 +1,1 @@
+export const createArrayOfValues = (nbElements: Number, defaultValue: Number):Number[] => Array.from(Array(nbElements), () => defaultValue);

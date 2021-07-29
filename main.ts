@@ -1,16 +1,15 @@
 import { Logger } from './log';
-
-Logger.log('TypeScript works!') ;
+import * as Utils from './utils';
 
 // détermine qui commence 
-let player:Number = Math.floor(Math.random()*2);
+let player: Number = Math.floor(Math.random() * 2);
 
-const nbCol:Number = 3;
-const nbLig:Number = 3;
-const nbCases:Number = nbLig * nbCol;
+const nbCol: Number = 3;
+const nbLig: Number = 3;
+const nbCases: Number = nbLig * nbCol;
 
-let tabMorpion:Number[] = [... new Array(nbCases).keys()].map(x => -1);
+Logger.log('test');
+// génère un tableau de -1
+let tabMorpion = Utils.createArrayOfValues(nbCases, -1);
 
-tabMorpion = Array.from(9, (_, i) =>-1) ; 
-
-Logger.log(player,tabMorpion);
+Logger.log(player, tabMorpion);
