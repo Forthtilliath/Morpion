@@ -1,15 +1,27 @@
 import * as Utils from './utils';
 
 class Game {
-  constructor(nbCol: Number, nbLig: Number) {
+  constructor(container: HTMLElement, nbCol: Number, nbLig: Number) {
+    this.container = container;
     this.nbCol = nbCol;
     this.nbLig = nbLig;
     this.nbCases = nbLig * nbCol;
     this.tabCases = [];
     this.playerTurn = -1;
+
+    this.createCases();
   }
 
-  init() {
+  createCases(): void {
+    const uneCase = document.createElement('div');
+    uneCase.classList.add('case');
+    for (let i = 0; i < this.nbCases; i++) {
+      this.container.append(uneCase);
+    }
+  }
+
+  // initialise les valeurs pour commencer une partie 
+  init(): void {
     // détermine qui commence 
     this.playerTurn = Math.floor(Math.random() * 2);
 
@@ -17,18 +29,18 @@ class Game {
     this.tabCases = Utils.createArrayOfValues(this.nbCases, -1);
   }
 
-  launch() {
+  // démarre une nouvelle partie 
+  launch(): void {
     this.init();
   }
 
-  /**
-   * Change le tour du joueur
-   **/
-  setPlayerTurn() {
+  // Change le tour du joueur
+  setPlayerTurn(): void {
     this.playerTurn = +!this.playerTurn;
   }
 
-  checkCompleted() {
+  // verifie s'il reste une case vide. Retourne true si toutes les sont complétées
+  checkCompleted(): Boolean {
     return !this.tabCases.some(x => x === -1);
   }
 };
