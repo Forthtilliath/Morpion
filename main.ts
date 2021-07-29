@@ -11,3 +11,4 @@ Logger.log(Morpion);
 
 Morpion.setPlayerTurn();
 Logger.log(Morpion);
+Logger.log(Morpion.checkCompleted());
