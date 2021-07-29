@@ -12,11 +12,17 @@ class Game {
     this.createCases();
   }
 
-  createCases(): void {
+  createCase(): HTMLDivElement {
     const uneCase = document.createElement('div');
     uneCase.classList.add('case');
+
+    return uneCase;
+  }
+
+  createCases(): void {
     for (let i = 0; i < this.nbCases; i++) {
-      this.container.append(uneCase);
+      let div = this.container.appendChild(this.createCase());
+      div.textContent = i;
     }
   }
 
