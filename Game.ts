@@ -10,8 +10,12 @@ class Game {
     this.playerTurn = -1;
 
     this.createCases();
+    this.createEvents();
   }
 
+  /****************
+   * Cases        *
+   ****************/
   createCase(): HTMLDivElement {
     const uneCase = document.createElement('div');
     uneCase.classList.add('case');
@@ -24,6 +28,20 @@ class Game {
       let div = this.container.appendChild(this.createCase());
       div.textContent = i;
     }
+  }
+
+  /*getCase(i) {
+    return this.container.querySelector(`.case:nth-child(${i})`)
+  }*/
+
+  createEvents(): void {
+    //this.container.querySelectorAll('.case').forEach((uneCase) => (event) => this.handleClick(event));
+    this.container.querySelectorAll('.case').forEach((uneCase) => uneCase.addEventListener('click', event => this.handleClick(event)));
+
+  }
+
+  handleClick(event) {
+    event.target.style.backgroundColor = 'red';
   }
 
   // initialise les valeurs pour commencer une partie 
