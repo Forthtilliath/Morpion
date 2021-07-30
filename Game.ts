@@ -12,7 +12,9 @@ class Game {
 
     // tableaux contenant les positions
     this.tabKeys = Utils.createArrayOfKeys(this.nbCases);
+      // contient les id du début de chaque colonne
     this.tabKeysCol = this.tabKeys.slice(0, this.nbCol);
+    // contient les id du début de chaque ligne 
     this.tabKeysLig = this.tabKeys.slice(0, this.nbLig).map(x => x * this.nbCol);
     this.tabVictories = [];
 
@@ -87,21 +89,7 @@ class Game {
     // victoires liées aux diagonales (j'ai peu testé celles ci donc à vérifier ) 
     this.tabVictories.push(...this.tabKeysLig.filter(x => ((x + this.nbCol) <= this.nbCol)).map(x => [x, x + 4, x + 8]));
     this.tabVictories.push(...this.tabKeysLig.filter(x => ((x - (this.nbCol - 1) * 2) >= 0)).map(x => [x, x - 2, x - 4]));
-
-    // Logger.log(arrWin);
-    Logger.log(this.tabVictories);
   }
-
-  // retourne les id des valeurs de chaque colonne
-  getFirstValuesCol(): Number[] {
-    return [...Array(this.nbCol).keys()];
-  }
-
-  // retourne les id des valeurs de chaque ligne
-  getFirstValuesLine(): Number[] {
-    return [...Array(this.nbLig).keys()].map(x => x * this.nbCol);
-  }
-
 };
 
 export default Game;
