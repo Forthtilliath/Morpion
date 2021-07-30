@@ -13,3 +13,4 @@ Morpion.launch();
 //Morpion.setPlayerTurn();
 Logger.log(Morpion);
 Logger.log(Morpion.checkCompleted());
+Morpion.generateArrayVictory();

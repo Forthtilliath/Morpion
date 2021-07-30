@@ -1,4 +1,5 @@
 import * as Utils from './utils';
+import { Logger } from './log';
 
 class Game {
   constructor(container: HTMLElement, nbCol: Number, nbLig: Number) {
@@ -8,6 +9,8 @@ class Game {
     this.nbCases = nbLig * nbCol;
     this.tabCases = [];
     this.playerTurn = -1;
+
+    this.tabVictories = [];
 
     this.createCases();
     this.createEvents();
@@ -34,8 +37,10 @@ class Game {
     return this.container.querySelector(`.case:nth-child(${i})`)
   }*/
 
+  /*****************
+   * Events        *
+   *****************/
   createEvents(): void {
-    //this.container.querySelectorAll('.case').forEach((uneCase) => (event) => this.handleClick(event));
     this.container.querySelectorAll('.case').forEach((uneCase) => uneCase.addEventListener('click', event => this.handleClick(event)));
 
   }
@@ -67,6 +72,38 @@ class Game {
   checkCompleted(): Boolean {
     return !this.tabCases.some(x => x === -1);
   }
+
+  /************************
+   * Generation victories *
+   ************************/
+  generateArrayVictory() {
+    //const arr = [...Array(this.nbCases).keys()];
+    const arr = Utils.createArrayOfKeys(this.nbCases);
+
+    //const arrcol = this.getFirstValuesCol();
+    //const arrline = this.getFirstValuesLine();
+
+    // victoires liées aux lignes et colonnes
+    // this.tabVictories.push(...arrcol.map(x => [x, x + 3, x + 6]));
+    //this.tabVictories.push(...arrline.map(x => [x, x + 1, x + 2]));
+    // victoires liées aux diagonales (j'ai peu testé celles ci donc à vérifier ) 
+    // this.tabVictories.push(...arrline.filter(x => ((x + this.nbCol) <= this.nbCol)).map(x => [x, x + 4, x + 8]));
+    //this.tabVictories.push(...arrline.filter(x => ((x - (this.nbCol - 1) * 2) >= 0)).map(x => [x, x - 2, x - 4]));
+
+    // Logger.log(arrWin);
+    Logger.log(arr);
+  }
+
+  // retourne les id des valeurs de chaque colonne
+  getFirstValuesCol(): Number[] {
+    return [...Array(this.nbCol).keys()];
+  }
+
+  // retourne les id des valeurs de chaque ligne
+  getFirstValuesLine(): Number[] {
+    return [...Array(this.nbLig).keys()].map(x => x * this.nbCol);
+  }
+
 };
 
 export default Game;
