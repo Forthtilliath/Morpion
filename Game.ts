@@ -81,21 +81,15 @@ class Game {
    * Generation victories *
    ************************/
   generateArrayVictory() {
-    //const arr = [...Array(this.nbCases).keys()];
-    const arr = Utils.createArrayOfKeys(this.nbCases);
-
-    const arrcol = this.getFirstValuesCol();
-    //const arrline = this.getFirstValuesLine();
-
     // victoires liées aux lignes et colonnes
-    // this.tabVictories.push(...arrcol.map(x => [x, x + 3, x + 6]));
-    //this.tabVictories.push(...arrline.map(x => [x, x + 1, x + 2]));
+    this.tabVictories.push(...this.tabKeysCol.map(x => [x, x + 3, x + 6]));
+    this.tabVictories.push(...this.tabKeysLig.map(x => [x, x + 1, x + 2]));
     // victoires liées aux diagonales (j'ai peu testé celles ci donc à vérifier ) 
     // this.tabVictories.push(...arrline.filter(x => ((x + this.nbCol) <= this.nbCol)).map(x => [x, x + 4, x + 8]));
     //this.tabVictories.push(...arrline.filter(x => ((x - (this.nbCol - 1) * 2) >= 0)).map(x => [x, x - 2, x - 4]));
 
     // Logger.log(arrWin);
-    Logger.log(arrcol);
+    Logger.log(this.tabVictories);
   }
 
   // retourne les id des valeurs de chaque colonne
