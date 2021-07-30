@@ -10,6 +10,10 @@ class Game {
     this.tabCases = [];
     this.playerTurn = -1;
 
+    // tableaux contenant les positions
+    this.tabKeys = Utils.createArrayOfKeys(this.nbCases);
+    this.tabKeysCol = this.tabKeys.slice(0, this.nbCol);
+    this.tabKeysLig = this.tabKeys.slice(0, this.nbLig).map(x => x * this.nbCol);
     this.tabVictories = [];
 
     this.createCases();
@@ -80,7 +84,7 @@ class Game {
     //const arr = [...Array(this.nbCases).keys()];
     const arr = Utils.createArrayOfKeys(this.nbCases);
 
-    //const arrcol = this.getFirstValuesCol();
+    const arrcol = this.getFirstValuesCol();
     //const arrline = this.getFirstValuesLine();
 
     // victoires liées aux lignes et colonnes
@@ -91,7 +95,7 @@ class Game {
     //this.tabVictories.push(...arrline.filter(x => ((x - (this.nbCol - 1) * 2) >= 0)).map(x => [x, x - 2, x - 4]));
 
     // Logger.log(arrWin);
-    Logger.log(arr);
+    Logger.log(arrcol);
   }
 
   // retourne les id des valeurs de chaque colonne

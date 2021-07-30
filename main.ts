@@ -12,5 +12,5 @@ Morpion.launch();
 
 //Morpion.setPlayerTurn();
 Logger.log(Morpion);
-Logger.log(Morpion.checkCompleted());
-Morpion.generateArrayVictory();
+Logger.log(Morpion.tabKeysLig);
+//Morpion.generateArrayVictory();
