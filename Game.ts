@@ -24,6 +24,7 @@ class Game {
      */
     this.tabCases = [];
     this.playerTurn = -1;
+    this.tabPlayersContent = ['X', 'O'];
 
     // tableaux contenant les positions
     this.tabKeys = Utils.createArrayOfKeys(this.nbCases);
@@ -80,6 +81,7 @@ class Game {
   }
 
 
+
   /*****************
    * Events        *
    *****************/
@@ -96,11 +98,14 @@ class Game {
    * Événement qui s'active lorsqu'on clique sur une case
    */
   handleClick(event: Event) {
-    Logger.log('event on click', event.target);
     event.target.style.backgroundColor = 'red';
     const caseNumber = this.getCaseNumber(event.target);
 
     this.tabCases[caseNumber] = this.playerTurn;
+    
+    event.target.textContent = this.tabPlayersContent[this.playerTurn ];
+    
+    this.setPlayerTurn();
   }
 
   // initialise les valeurs pour commencer une partie 
