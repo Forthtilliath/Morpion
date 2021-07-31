@@ -58,7 +58,7 @@ class Game {
   createCases(): void {
     for (let i = 0; i < this.nbCases; i++) {
       let div = this.container.appendChild(this.createCase());
-      div.textContent = i;
+      //div.textContent = i;
     }
   }
 
@@ -98,7 +98,6 @@ class Game {
    * Événement qui s'active lorsqu'on clique sur une case
    */
   handleClick(event: Event) {
-    event.target.style.backgroundColor = 'red';
     const caseNumber = this.getCaseNumber(event.target);
 
     this.tabCases[caseNumber] = this.playerTurn;
@@ -131,7 +130,7 @@ class Game {
    * Fin de partie.      *
    ***********************/
 
-  // verifie s'il reste une case vide. Retourne true si toutes les sont complétées
+  // Vérifie s'il reste une case vide. Retourne true si toutes les cases sont complétées
   checkCompleted(): Boolean {
     return !this.tabCases.some(x => x === -1);
   }
