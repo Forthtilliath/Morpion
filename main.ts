@@ -14,3 +14,4 @@ Morpion.launch();
 Logger.log(Morpion);
 //Logger.log(Morpion.tabKeysLig);
 Morpion.generateArrayVictory();
+Logger.log (Morpion.checkVictory()) ;

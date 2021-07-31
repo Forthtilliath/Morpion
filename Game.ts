@@ -9,6 +9,7 @@ class Game {
     this.nbCases = nbLig * nbCol;
     this.tabCases = [];
     this.playerTurn = -1;
+    //this.lastCasePlayed = -1;
 
     // tableaux contenant les positions
     this.tabKeys = Utils.createArrayOfKeys(this.nbCases);
@@ -42,6 +43,18 @@ class Game {
   /*getCase(i) {
     return this.container.querySelector(`.case:nth-child(${i})`)
   }*/
+  getValueOfCase(i) {
+    return +this.container.querySelector(`.case:nth-child(${i+1})`).textContent;
+  }
+
+  getValueOfCases(...uneCase: Number): Number[] {
+    return cases.map(uneCase => this.getValueOfCase(uneCase));
+  }
+
+  getCaseNumber(laCase: HTMLDivElement): Number {
+    return [...document.querySelectorAll('.case')].map((uneCase, i) => (uneCase === laCase) ? i : -1).filter(x => x !== -1).pop();
+  }
+
 
   /*****************
    * Events        *
@@ -53,6 +66,7 @@ class Game {
 
   handleClick(event) {
     event.target.style.backgroundColor = 'red';
+    Logger.log(this.getCaseNumber(event.target))
   }
 
   // initialise les valeurs pour commencer une partie 
@@ -73,7 +87,7 @@ class Game {
   setPlayerTurn(): void {
     this.playerTurn = +!this.playerTurn;
   }
-  
+
   /***********************
    * Fin de partie.      *
    ***********************/
@@ -82,15 +96,16 @@ class Game {
   checkCompleted(): Boolean {
     return !this.tabCases.some(x => x === -1);
   }
-  
-  checkVictory():Boolean {
-    return false;
+
+  checkVictory(): Boolean {
+    // verifier toutes conditions de victoire contenant la dernière case jouée
+    return this.tabVictories.some((tabVictory) => tabVictory.every(x => x === this.playerTurn));
   }
 
   /************************
    * Generation victories *
    ************************/
-  generateArrayVictory():void {
+  generateArrayVictory(): void {
     // victoires liées aux lignes et colonnes
     this.tabVictories.push(...this.tabKeysCol.map(x => [x, x + 3, x + 6]));
     this.tabVictories.push(...this.tabKeysLig.map(x => [x, x + 1, x + 2]));
