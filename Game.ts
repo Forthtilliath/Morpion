@@ -3,13 +3,27 @@ import { Logger } from './log';
 
 class Game {
   constructor(container: HTMLElement, nbCol: Number, nbLig: Number) {
+    /**
+     * Élément qui contiendra toutes les cases du jeu 
+     */
     this.container = container;
+    /**
+     * Nombre de colonnes 
+     */
     this.nbCol = nbCol;
+    /**
+     * Nombre de lignes 
+     */
     this.nbLig = nbLig;
+    /**
+     * Nombre total de cases 
+     */
     this.nbCases = nbLig * nbCol;
+    /**
+     * Tableau contenant la valeur de chaque case : -1 pour case vide, 0 pour joueur 1, 1 pour joueur 2
+     */
     this.tabCases = [];
     this.playerTurn = -1;
-    //this.lastCasePlayed = -1;
 
     // tableaux contenant les positions
     this.tabKeys = Utils.createArrayOfKeys(this.nbCases);
@@ -26,6 +40,10 @@ class Game {
   /****************
    * Cases        *
    ****************/
+
+  /**
+   * Crée une case dans le DOM
+   */
   createCase(): HTMLDivElement {
     const uneCase = document.createElement('div');
     uneCase.classList.add('case');
@@ -33,6 +51,9 @@ class Game {
     return uneCase;
   }
 
+  /**
+   * Crée un nombre de cases dans le DOM en fonction du nombre de cases dans le jeu
+   */
   createCases(): void {
     for (let i = 0; i < this.nbCases; i++) {
       let div = this.container.appendChild(this.createCase());
@@ -40,9 +61,9 @@ class Game {
     }
   }
 
-  /*getCase(i) {
-    return this.container.querySelector(`.case:nth-child(${i})`)
-  }*/
+  /**
+   * Récupère le contenu d'une case
+   */
   getValueOfCase(i) {
     return +this.container.querySelector(`.case:nth-child(${i+1})`).textContent;
   }
@@ -51,6 +72,9 @@ class Game {
     return cases.map(uneCase => this.getValueOfCase(uneCase));
   }
 
+/**
+ * Récupère le numéro d'une case
+ */
   getCaseNumber(laCase: HTMLDivElement): Number {
     return [...document.querySelectorAll('.case')].map((uneCase, i) => (uneCase === laCase) ? i : -1).filter(x => x !== -1).pop();
   }
@@ -59,12 +83,19 @@ class Game {
   /*****************
    * Events        *
    *****************/
+   
+   /**
+    * Génère l'ensemble des événements sur les cases 
+    */
   createEvents(): void {
     this.container.querySelectorAll('.case').forEach((uneCase) => uneCase.addEventListener('click', event => this.handleClick(event)));
 
   }
 
-  handleClick(event) {
+/**
+ * Événement qui s'active lorsqu'on clique sur une case
+ */
+  handleClick(event: Event) {
     event.target.style.backgroundColor = 'red';
     Logger.log(this.getCaseNumber(event.target))
   }
@@ -98,13 +129,13 @@ class Game {
   }
 
   checkVictory(): Boolean {
-    // verifier toutes conditions de victoire contenant la dernière case jouée
     return this.tabVictories.some((tabVictory) => tabVictory.every(x => x === this.playerTurn));
   }
 
   /************************
    * Generation victories *
    ************************/
+
   generateArrayVictory(): void {
     // victoires liées aux lignes et colonnes
     this.tabVictories.push(...this.tabKeysCol.map(x => [x, x + 3, x + 6]));
