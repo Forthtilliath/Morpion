@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="stylesheet" href="styles/index.css" />
   <title>Forth Morpion TypeScript</title>
-
   <script src="//unpkg.com/systemjs@0.19.47/dist/system.js"></script>
 </head>
 
 <body>
-  <div id="morpion"></div>
+  <div class="header">
+    <div class="title">Morpion</div>
+    <div class="button">
+      <button id="btn_launch">Lancer la partie</button>
+    </div>
+  </div>
+  <div class="container">
+    <div id="morpion"></div>
+  </div>
   <script src="config.js"></script>
 </body>
+
 </html>

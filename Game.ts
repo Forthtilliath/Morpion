@@ -12,7 +12,7 @@ class Game {
 
     // tableaux contenant les positions
     this.tabKeys = Utils.createArrayOfKeys(this.nbCases);
-      // contient les id du début de chaque colonne
+    // contient les id du début de chaque colonne
     this.tabKeysCol = this.tabKeys.slice(0, this.nbCol);
     // contient les id du début de chaque ligne 
     this.tabKeysLig = this.tabKeys.slice(0, this.nbLig).map(x => x * this.nbCol);
@@ -73,16 +73,24 @@ class Game {
   setPlayerTurn(): void {
     this.playerTurn = +!this.playerTurn;
   }
+  
+  /***********************
+   * Fin de partie.      *
+   ***********************/
 
   // verifie s'il reste une case vide. Retourne true si toutes les sont complétées
   checkCompleted(): Boolean {
     return !this.tabCases.some(x => x === -1);
   }
+  
+  checkVictory():Boolean {
+    return false;
+  }
 
   /************************
    * Generation victories *
    ************************/
-  generateArrayVictory() {
+  generateArrayVictory():void {
     // victoires liées aux lignes et colonnes
     this.tabVictories.push(...this.tabKeysCol.map(x => [x, x + 3, x + 6]));
     this.tabVictories.push(...this.tabKeysLig.map(x => [x, x + 1, x + 2]));
