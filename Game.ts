@@ -72,9 +72,9 @@ class Game {
     return cases.map(uneCase => this.getValueOfCase(uneCase));
   }
 
-/**
- * Récupère le numéro d'une case
- */
+  /**
+   * Récupère le numéro d'une case
+   */
   getCaseNumber(laCase: HTMLDivElement): Number {
     return [...document.querySelectorAll('.case')].map((uneCase, i) => (uneCase === laCase) ? i : -1).filter(x => x !== -1).pop();
   }
@@ -83,21 +83,24 @@ class Game {
   /*****************
    * Events        *
    *****************/
-   
-   /**
-    * Génère l'ensemble des événements sur les cases 
-    */
+
+  /**
+   * Génère l'ensemble des événements sur les cases 
+   */
   createEvents(): void {
-    this.container.querySelectorAll('.case').forEach((uneCase) => uneCase.addEventListener('click', event => this.handleClick(event)));
+    this.container.querySelectorAll('.case').forEach((uneCase) => uneCase.addEventListener('click', event => this.handleClick(event), { once: true }));
 
   }
 
-/**
- * Événement qui s'active lorsqu'on clique sur une case
- */
+  /**
+   * Événement qui s'active lorsqu'on clique sur une case
+   */
   handleClick(event: Event) {
+    Logger.log('event on click', event.target);
     event.target.style.backgroundColor = 'red';
-    Logger.log(this.getCaseNumber(event.target))
+    const caseNumber = this.getCaseNumber(event.target);
+
+    this.tabCases[caseNumber] = this.playerTurn;
   }
 
   // initialise les valeurs pour commencer une partie 
