@@ -7,6 +7,4 @@ const nbCol: Number = 3;
 const nbLig: Number = 3;
 const Morpion: Game = new Game(container, nbCol, nbLig)
 
-Morpion.launch();
-
-Logger.log(Morpion);
+document.querySelector('#btn_launch').addEventListener('click', () => Morpion.launch())
