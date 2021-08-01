@@ -139,6 +139,8 @@ class Game {
   // démarre une nouvelle partie 
   launch(): void {
     this.init();
+
+
   }
 
   // Change le tour du joueur
@@ -160,20 +162,23 @@ class Game {
   }
 
   showEnd(typeEnd: Number) {
-    this.container.classList.add('hidden');
-
+    //this.container.classList.add('hidden');
+    Utils.setVisible(this.container, false);
 
     if (typeEnd !== -1) {
       Logger.log('victory');
 
       this.elements.player.textContent = this.playerTurn;
-      Logger.log(this.elements.victory);
-      this.elements.victory.classList.remove('hidden');
+      //this.elements.victory.classList.remove('hidden');
+
+      Utils.setVisible(this.elements.victory, true);
 
       return;
     }
     Logger.log('Égalité ');
-    this.elements.draw.classList.remove('hidden');
+    //this.elements.draw.classList.remove('hidden');
+    Utils.setVisible(this.elements.draw, true);
+
 
   }
 
