@@ -13,3 +13,11 @@
 .container {
   @include divCenter();
 }
+
+.hidden {
+  display: none
+}
+
+.messageEnd {
+  display: flex;
+}

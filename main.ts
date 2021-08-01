@@ -8,10 +8,5 @@ const nbLig: Number = 3;
 const Morpion: Game = new Game(container, nbCol, nbLig)
 
 Morpion.launch();
-//Logger.log(Morpion);
 
-//Morpion.setPlayerTurn();
 Logger.log(Morpion);
-//Logger.log(Morpion.tabKeysLig);
-Morpion.generateArrayVictory();
-Logger.log (Morpion.checkVictory()) ;

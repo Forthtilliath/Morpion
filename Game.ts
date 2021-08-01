@@ -7,6 +7,11 @@ class Game {
      * Élément qui contiendra toutes les cases du jeu 
      */
     this.container = container;
+    this.elements = {
+      victory: document.querySelector('#victory'),
+      draw: document.querySelector('#draw'),
+      player: document.querySelector('#playerId')
+    };
     /**
      * Nombre de colonnes 
      */
@@ -35,6 +40,7 @@ class Game {
     this.tabVictories = [];
 
     this.createCases();
+    this.generateArrayVictory();
     this.createEvents();
   }
 
@@ -66,10 +72,12 @@ class Game {
    * Récupère le contenu d'une case
    */
   getValueOfCase(i) {
-    return +this.container.querySelector(`.case:nth-child(${i+1})`).textContent;
+    return this.tabCases[i];
+
+    //return +this.container.querySelector(`.case:nth-child(${i+1})`).textContent;
   }
 
-  getValueOfCases(...uneCase: Number): Number[] {
+  getValueOfCases(cases: Number[]): Number[] {
     return cases.map(uneCase => this.getValueOfCase(uneCase));
   }
 
@@ -101,9 +109,21 @@ class Game {
     const caseNumber = this.getCaseNumber(event.target);
 
     this.tabCases[caseNumber] = this.playerTurn;
-    
-    event.target.textContent = this.tabPlayersContent[this.playerTurn ];
-    
+
+    event.target.textContent = this.tabPlayersContent[this.playerTurn];
+
+    if (this.checkCompleted()) {
+      this.showEnd(-1);
+      return;
+    }
+
+    if (this.checkVictory()) {
+      Logger.log('victory ');
+      this.showEnd(this.playerTurn);
+      return;
+    }
+
+
     this.setPlayerTurn();
   }
 
@@ -136,7 +156,25 @@ class Game {
   }
 
   checkVictory(): Boolean {
-    return this.tabVictories.some((tabVictory) => tabVictory.every(x => x === this.playerTurn));
+    return this.tabVictories.some((tabVictory) => this.getValueOfCases(tabVictory).every(x => x === this.playerTurn));
+  }
+
+  showEnd(typeEnd: Number) {
+    this.container.classList.add('hidden');
+
+
+    if (typeEnd !== -1) {
+      Logger.log('victory');
+
+      this.elements.player.textContent = this.playerTurn;
+      Logger.log(this.elements.victory);
+      this.elements.victory.classList.remove('hidden');
+
+      return;
+    }
+    Logger.log('Égalité ');
+    this.elements.draw.classList.remove('hidden');
+
   }
 
   /************************
