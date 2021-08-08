@@ -14,10 +14,10 @@
   @include divCenter();
 }
 
-.hidden {
-  display: none
-}
-
 .messageEnd {
   display: flex;
+}
+
+.hidden {
+  display: none!important;
 }
