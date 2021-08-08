@@ -54,6 +54,10 @@
 
 .messageEnd {
   display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 500px;
 }
 
 .hidden {
